@@ -4,14 +4,14 @@ import { fetchMusicFestivals } from '../service/httpService';
 import { Container, Typography, Card, CardContent, Box } from '@mui/material';
 
 const RecordDisplayComponent: React.FC = () => {
-  const [recordDto, setRecordDto] = useState<RecordDto[]>([]);
+  const [recordDtoGroup, setRecordDtoGroup] = useState<RecordDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchMusicFestivals();
-        setRecordDto(data);
+        setRecordDtoGroup(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -25,9 +25,9 @@ const RecordDisplayComponent: React.FC = () => {
     <Container>
       {loading ? (
         <Typography variant="body1">Loading...</Typography>
-      ) : recordDto.length > 0 ? (
+      ) : recordDtoGroup.length > 0 ? (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
-          {recordDto.map((record) => (
+          {recordDtoGroup.map((record) => (
             <Card key={record.recordLabel} variant="outlined" sx={{ flex: '1 1 calc(50% - 16px)', marginBottom: 2 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
