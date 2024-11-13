@@ -24,7 +24,7 @@ const RecordDisplayComponent: React.FC = () => {
   return (
     <Container>
       {loading ? (
-        <Typography variant="body1">Loading...</Typography>
+        <Typography variant="body1" sx={{ color: 'text.primary' }}>Loading...</Typography>
       ) : recordDtoGroup.length > 0 ? (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
           {recordDtoGroup.map((record) => (
@@ -50,7 +50,7 @@ const RecordDisplayComponent: React.FC = () => {
           ))}
         </Box>
       ) : (
-        <Typography variant="body1">No records available</Typography>
+        <Typography variant="body1" sx={{ color: 'text.primary' }}>No records available</Typography>
       )}
     </Container>
   );
