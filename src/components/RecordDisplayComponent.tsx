@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { RecordDto } from '../models/dto/RecordDto';
-import { fetchMusicFestivals } from '../service/httpService';
+import { httpService } from '../service/httpService';
 import { Container, Typography, Card, CardContent, Box } from '@mui/material';
 
 const RecordDisplayComponent: React.FC = () => {
+  const { getMusicFestivals } = httpService;
   const [recordDtoGroup, setRecordDtoGroup] = useState<RecordDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchMusicFestivals();
+        const data = await getMusicFestivals();
         setRecordDtoGroup(data);
       } catch (error) {
         console.error('Error fetching data:', error);
