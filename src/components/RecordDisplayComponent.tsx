@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { RecordDto } from '../models/dto/RecordDto';
 import { httpService } from '../service/httpService';
 import { Container, Typography, Card, CardContent, Box } from '@mui/material';
+import { toolKit } from '../util/toolKits'; 
+import { MusicFestival } from '../models/MusicFestival';
 
 const RecordDisplayComponent: React.FC = () => {
   const { getMusicFestivals } = httpService;
@@ -11,8 +13,9 @@ const RecordDisplayComponent: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getMusicFestivals();
-        setRecordDtoGroup(data);
+        const musicFestivalsData:MusicFestival[] = await getMusicFestivals();
+        const displayRecordDtoData:RecordDto[] = toolKit.mapMusicFestivalArrayToRecordDtoArray(musicFestivalsData); 
+        setRecordDtoGroup(displayRecordDtoData);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {

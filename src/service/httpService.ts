@@ -1,20 +1,17 @@
 import axios from 'axios';
 import { MusicFestival } from '../models/MusicFestival';
-import { RecordDto } from '../models/dto/RecordDto';
-import { toolKit } from '../util/toolKits'; 
 import { API_V1_GET_FESTIVALS } from '../util/constants';
 
 interface httpService {
-  getMusicFestivals: () => Promise<RecordDto[]>;
+  getMusicFestivals: () => Promise<MusicFestival[]>;
 }
 
 export const httpService: httpService = {
-  getMusicFestivals : async (): Promise<RecordDto[]> => {
+  getMusicFestivals : async (): Promise<MusicFestival[]> => {
     try {
       const response = await axios.get<MusicFestival[]>(API_V1_GET_FESTIVALS);
       if (Array.isArray(response.data)) {    
-        const displayData = toolKit.mapMusicFestivalArrayToRecordDtoArray(response.data); 
-        return displayData; // Return the mapped data
+        return response.data;
       }  
         
       return []; 
