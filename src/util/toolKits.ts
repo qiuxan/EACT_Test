@@ -49,13 +49,16 @@ export const toolKit: ToolKit = {
         musicFestivalGroup.forEach((musicFestival) => {
             musicFestival.bands.forEach((band) => {
                 if (!band.recordLabel) return;
-                recordBandGroupKeyValueMap.set(band.recordLabel, [...(recordBandGroupKeyValueMap.get(band.recordLabel) || []), band.name]);
+                const existingBandNames = recordBandGroupKeyValueMap.get(band.recordLabel) || [];
+                if (!existingBandNames.includes(band.name)) {
+                    recordBandGroupKeyValueMap.set(band.recordLabel, [...existingBandNames, band.name]);
+                }
                 if( !musicFestival.name )return;
                 bandFestivalGroupLabellMap.set(band.name, [...(bandFestivalGroupLabellMap.get(band.name) || []), musicFestival.name]);                
             });
         });
         recordBandGroupKeyValueMap.forEach((bandNameGroup, recordLabel) => {
-           
+
             let bandDtoGroupToStore:BandDto[] =[];
             let recordDtoToStore:RecordDto;
             
