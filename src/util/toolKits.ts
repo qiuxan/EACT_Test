@@ -60,7 +60,7 @@ export const toolKit: ToolKit = {
         recordBandGroupKeyValueMap.forEach((bandNameGroup, recordLabel) => {
 
             let bandDtoGroupToStore:BandDto[] =[];
-            let recordDtoToStore:RecordDto;
+            let recordDtoToStore: RecordDto = { recordLabel: '', bandDtoGroup: [] };
             
             bandNameGroup.forEach((bandName) => {
                 const sortedFestivalNameGroup = this.sortStringArray(bandFestivalGroupLabellMap.get(bandName) || [], ASC);
